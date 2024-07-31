@@ -1,9 +1,11 @@
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Project.AssetLoader
+namespace Project
 {
+    [UsedImplicitly]
     public class AssetLoader : IAssetLoader
     {
         public GameObject CashedObject { get; private set; }

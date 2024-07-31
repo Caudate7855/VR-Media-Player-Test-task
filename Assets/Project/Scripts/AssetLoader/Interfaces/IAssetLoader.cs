@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 
-namespace Project.AssetLoader
+namespace Project
 {
     public interface IAssetLoader
     {

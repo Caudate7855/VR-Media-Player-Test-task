@@ -1,4 +1,4 @@
-using Project.AssetLoader;
+using Project.UILoader;
 using Zenject;
 
 namespace Project.IoC.MonoInstallers
@@ -9,7 +9,11 @@ namespace Project.IoC.MonoInstallers
         {
             Container
                 .Bind<IAssetLoader>()
-                .To<AssetLoader.AssetLoader>()
+                .To<AssetLoader>()
+                .AsSingle();
+            
+            Container
+                .Bind<UIWindowPresenter>()
                 .AsSingle();
         }
     }
