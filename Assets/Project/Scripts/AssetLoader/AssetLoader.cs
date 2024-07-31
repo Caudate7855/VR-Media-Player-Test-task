@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using Project.AssetLoader.Interfaces;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -7,7 +6,7 @@ namespace Project.AssetLoader
 {
     public class AssetLoader : IAssetLoader
     {
-        public GameObject CashedObject { get; set; }
+        public GameObject CashedObject { get; private set; }
 
         public async UniTask<T> Load<T>(string path)
         {

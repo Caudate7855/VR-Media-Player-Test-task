@@ -1,3 +1,4 @@
+using Project.AssetLoader;
 using Zenject;
 
 namespace Project.IoC.MonoInstallers
@@ -6,7 +7,10 @@ namespace Project.IoC.MonoInstallers
     {
         public override void InstallBindings()
         {
-            
+            Container
+                .Bind<IAssetLoader>()
+                .To<AssetLoader.AssetLoader>()
+                .AsSingle();
         }
     }
 }
