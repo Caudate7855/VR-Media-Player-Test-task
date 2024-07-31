@@ -1,16 +1,24 @@
+using UnityEngine;
+
 namespace Project.UILoader
 {
     public class UIWindowPresenter
     {
-        public IAssetLoader AssetLoader;
+        private IAssetLoader _assetLoader;
         
         private UIWindowView _uiWindowView;
         private UIWindowModel _uiWindowModel;
 
         public UIWindowPresenter(IAssetLoader assetLoader ,string uiWindowViewAddress)
         {
-            AssetLoader = assetLoader;
-            _uiWindowView = AssetLoader.Load<UIWindowView>(uiWindowViewAddress).GetAwaiter().GetResult();
+            _assetLoader = assetLoader;
+            InitializeWindow(uiWindowViewAddress);
+        }
+
+        private async void InitializeWindow(string uiWindowViewAddress)
+        {
+            _uiWindowView = await _assetLoader.Load<UIWindowView>(uiWindowViewAddress);
+            GameObject.Instantiate(_uiWindowView);
         }
     }
 }

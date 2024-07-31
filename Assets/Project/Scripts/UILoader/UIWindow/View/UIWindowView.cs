@@ -4,6 +4,9 @@ namespace Project.UILoader
 {
     public class UIWindowView : MonoBehaviour
     {
-        
+        public void Open()
+        {
+            
+        }
     }
 }
