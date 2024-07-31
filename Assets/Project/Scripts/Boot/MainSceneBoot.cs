@@ -1,4 +1,3 @@
-using System;
 using Project.UILoader;
 using UnityEngine;
 using Zenject;
@@ -7,6 +6,9 @@ namespace Project.Boot
 {
     public class MainSceneBoot: MonoBehaviour
     {
+        [Inject] private Camera _mainCamera;
+        [Inject] private MediaLinks _mediaLinks;
+        
         private AssetLoader _assetLoader;
         
         private UIWindowPresenter _window;
@@ -16,6 +18,11 @@ namespace Project.Boot
         {
             _assetLoader = new();
             _window = new UIWindowPresenter(_assetLoader, _windowPath);
+
+            Instantiate(_mainCamera);
+            
+            Debug.Log(_mediaLinks.PreviewImagesLinks[0]);
+            Debug.Log(_mediaLinks.VideoLinks[0]);
         }
     }
 }

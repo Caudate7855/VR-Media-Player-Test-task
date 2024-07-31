@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ab432df7214ec3bc13c05f2c177384, type: 3}
   m_Name: MediaLinks
   m_EditorClassIdentifier: 
+  _previewImagesLinks:
+  - 123
+  _videoLinks:
+  - 321
