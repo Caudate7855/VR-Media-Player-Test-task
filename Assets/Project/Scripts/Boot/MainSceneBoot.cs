@@ -20,9 +20,6 @@ namespace Project.Boot
             _window = new UIWindowPresenter(_assetLoader, _windowPath);
 
             Instantiate(_mainCamera);
-            
-            Debug.Log(_mediaLinks.PreviewImagesLinks[0]);
-            Debug.Log(_mediaLinks.VideoLinks[0]);
         }
     }
 }
