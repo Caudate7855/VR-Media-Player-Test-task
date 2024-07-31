@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Project.AssetLoader.Interfaces;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Project.AssetLoader
 {
