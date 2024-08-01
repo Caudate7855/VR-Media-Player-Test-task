@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Project.UILoader.Previews;
 using Project.UILoader.Previews.Enums;
+using RenderHeads.Media.AVProVideo;
 using UnityEngine;
 
 namespace Project.UILoader
@@ -20,6 +22,7 @@ namespace Project.UILoader
         private MediaLinks _mediaLinks;
 
         private List<UIWindowPreview> _previews;
+        private MediaPlayer _mediaPlayer;
 
         public UIWindowPresenter(IAssetLoader assetLoader, string uiWindowViewAddress, MediaLinks mediaLinks,
             Camera camera)
@@ -39,8 +42,12 @@ namespace Project.UILoader
         private async UniTask InitializeWindow(string uiWindowViewAddress, Camera camera)
         {
             var uiWindowView = await _assetLoader.Load<UIWindowView>(uiWindowViewAddress);
+            
             _uiWindowView = Object.Instantiate(uiWindowView);
             _uiWindowView.Initialize(camera);
+            _mediaPlayer = _uiWindowView.GetMediaPlayer();
+            _mediaPlayer.OpenMedia(new MediaPath(_mediaLinks.SerializableMediaLinks.First().VideoURL, MediaPathType.AbsolutePathOrURL));
+            _mediaPlayer.Play();
         }
 
         private async UniTask InitializePreviews()
@@ -58,17 +65,31 @@ namespace Project.UILoader
                     await URLMediaLoader.URLMediaLoader.LoadImageAsync(_mediaLinks.SerializableMediaLinks[i]
                         .PreviewURL);
 
+                _previews[i].EpisodeName = _mediaLinks.SerializableMediaLinks[i].EpisodeName;
+                
                 _previews[i].GetLoadingOverlay().Disable();
             }
         }
 
+        private void ChangeVideo(int index)
+        {
+            _mediaPlayer.OpenMedia(new MediaPath(_mediaLinks.SerializableMediaLinks[index].VideoURL, MediaPathType.AbsolutePathOrURL));
+            _mediaPlayer.Play();
+        }
+
         private void OnPreviewButtonClicked(UIWindowPreview preview)
         {
+            _mediaPlayer.Stop();
+            
             for (int i = 0, count = _previews.Count; i < count; i++)
             {
                 if (_previews[i] != preview)
                 {
                     DeselectPreview(_previews[i]);
+                }
+                else
+                {
+                    ChangeVideo(i);
                 }
             }
             

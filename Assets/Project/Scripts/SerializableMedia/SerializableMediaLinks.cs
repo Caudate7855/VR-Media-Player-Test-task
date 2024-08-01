@@ -7,6 +7,7 @@ namespace Project.SerializableMedia
     public class SerializableMediaLinks
     {
         public int EpisodeNumber;
+        public string EpisodeName;
         public string PreviewURL;
         public string VideoURL;
     }

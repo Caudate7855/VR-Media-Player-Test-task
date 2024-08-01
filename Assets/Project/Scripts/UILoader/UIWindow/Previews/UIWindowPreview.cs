@@ -9,11 +9,14 @@ namespace Project.UILoader.Previews
     public class UIWindowPreview : MonoBehaviour
     {
         public event Action<UIWindowPreview> OnButtonPressed;
-            
+        
+        public string EpisodeName;
+
         [SerializeField] private Image _image;
         [SerializeField] private Button _button;
         [SerializeField] private LoadingOverlay _loadingOverlay;
-        
+
+
         private PreviewStates _currentState;
 
         private void Awake()
