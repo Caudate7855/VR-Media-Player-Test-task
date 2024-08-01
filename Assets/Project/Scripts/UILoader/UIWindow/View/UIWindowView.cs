@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using Project.UILoader.Previews;
 using UnityEngine;
 
 namespace Project.UILoader
@@ -6,5 +9,8 @@ namespace Project.UILoader
     {
         public Camera MainCamera;
         public Canvas Canvas;
+
+        public List<UIWindowPreview> Previews;
+        
     }
 }

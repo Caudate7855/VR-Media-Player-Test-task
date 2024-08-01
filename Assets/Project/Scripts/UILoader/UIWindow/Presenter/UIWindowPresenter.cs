@@ -25,6 +25,17 @@ namespace Project.UILoader
             _uiWindowView = Object.Instantiate(uiWindowView);
             _uiWindowView.MainCamera = camera;
             _uiWindowView.Canvas.worldCamera = camera;
+
+            InitializePreviews();
+        }
+
+        private async void InitializePreviews()
+        {
+            for (int i = 0, count = _uiWindowView.Previews.Count; i < count; i++)
+            {
+                _uiWindowView.Previews[i].Image.sprite = 
+                    await URLMediaLoader.URLMediaLoader.LoadImageAsync(_mediaLinks.SerializableMediaLinks[i].PreviewURL);
+            }
         }
     }
 }
