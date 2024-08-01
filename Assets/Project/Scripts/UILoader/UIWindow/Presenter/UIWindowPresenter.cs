@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Project.UILoader
@@ -10,18 +11,20 @@ namespace Project.UILoader
         private IAssetLoader _assetLoader;
         private MediaLinks _mediaLinks;
 
-        public UIWindowPresenter(IAssetLoader assetLoader ,string uiWindowViewAddress, MediaLinks mediaLinks)
+        public UIWindowPresenter(IAssetLoader assetLoader ,string uiWindowViewAddress, MediaLinks mediaLinks, Camera camera)
         {
             _assetLoader = assetLoader;
             _mediaLinks = mediaLinks;
             
-            InitializeWindow(uiWindowViewAddress);
+            InitializeWindow(uiWindowViewAddress, camera);
         }
 
-        private async void InitializeWindow(string uiWindowViewAddress)
+        private async void InitializeWindow(string uiWindowViewAddress, Camera camera)
         {
-            _uiWindowView = await _assetLoader.Load<UIWindowView>(uiWindowViewAddress);
-            Object.Instantiate(_uiWindowView);
+            var uiWindowView = await _assetLoader.Load<UIWindowView>(uiWindowViewAddress);
+            _uiWindowView = Object.Instantiate(uiWindowView);
+            _uiWindowView.MainCamera = camera;
+            _uiWindowView.Canvas.worldCamera = camera;
         }
     }
 }
