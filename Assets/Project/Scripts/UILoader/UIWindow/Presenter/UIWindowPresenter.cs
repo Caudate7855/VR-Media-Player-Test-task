@@ -9,7 +9,7 @@ namespace Project.UILoader
 {
     public class UIWindowPresenter
     {
-        private const float SCALE_ANIMATION_DURATION = 0.3f;
+        private const float SCALE_ANIMATION_DURATION = 0.1f;
         private const float SELECTED_SCALE = 1.1f;
         private const float UNSELECTED_SCALE = 1f;
 
@@ -57,6 +57,8 @@ namespace Project.UILoader
                 _previews[i].GetImage().sprite =
                     await URLMediaLoader.URLMediaLoader.LoadImageAsync(_mediaLinks.SerializableMediaLinks[i]
                         .PreviewURL);
+
+                _previews[i].GetLoadingOverlay().Disable();
             }
         }
 

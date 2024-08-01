@@ -1,5 +1,6 @@
 using System;
 using Project.UILoader.Previews.Enums;
+using Project.UILoader.Previews.LoadingCircle;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +12,8 @@ namespace Project.UILoader.Previews
             
         [SerializeField] private Image _image;
         [SerializeField] private Button _button;
-        [SerializeField] private int _previewID;
-
+        [SerializeField] private LoadingOverlay _loadingOverlay;
+        
         private PreviewStates _currentState;
 
         private void Awake()
@@ -33,6 +34,11 @@ namespace Project.UILoader.Previews
         public Image GetImage()
         {
             return _image;
+        }
+
+        public LoadingOverlay GetLoadingOverlay()
+        {
+            return _loadingOverlay;
         }
 
         public void SetState(PreviewStates newState)
