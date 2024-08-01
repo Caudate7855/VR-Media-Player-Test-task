@@ -4,21 +4,24 @@ namespace Project.UILoader
 {
     public class UIWindowPresenter
     {
-        private IAssetLoader _assetLoader;
-        
         private UIWindowView _uiWindowView;
         private UIWindowModel _uiWindowModel;
 
-        public UIWindowPresenter(IAssetLoader assetLoader ,string uiWindowViewAddress)
+        private IAssetLoader _assetLoader;
+        private MediaLinks _mediaLinks;
+
+        public UIWindowPresenter(IAssetLoader assetLoader ,string uiWindowViewAddress, MediaLinks mediaLinks)
         {
             _assetLoader = assetLoader;
+            _mediaLinks = mediaLinks;
+            
             InitializeWindow(uiWindowViewAddress);
         }
 
         private async void InitializeWindow(string uiWindowViewAddress)
         {
             _uiWindowView = await _assetLoader.Load<UIWindowView>(uiWindowViewAddress);
-            GameObject.Instantiate(_uiWindowView);
+            Object.Instantiate(_uiWindowView);
         }
     }
 }

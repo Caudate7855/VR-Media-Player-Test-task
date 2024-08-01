@@ -17,7 +17,7 @@ namespace Project.Boot
         private void Awake()
         {
             _assetLoader = new();
-            _window = new UIWindowPresenter(_assetLoader, _windowPath);
+            _window = new UIWindowPresenter(_assetLoader, _windowPath, _mediaLinks);
 
             Instantiate(_mainCamera);
         }
