@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Project.UILoader.ControlPanel;
 using Project.UILoader.Previews;
 using RenderHeads.Media.AVProVideo;
 using TMPro;
@@ -15,15 +16,16 @@ namespace Project.UILoader
         [SerializeField] private MediaPlayer _mediaPlayer;
         [SerializeField] private Canvas _canvas;
         [SerializeField] private List<UIWindowPreview> _previews;
-        [SerializeField] private Button _switchVideoStateButton;
+        [SerializeField] private SwitchVideoStateButton _switchVideoStateButton;
         [SerializeField] private TMP_Text _episodeName;
         
         public void Initialize(Camera camera)
         {
             _canvas.worldCamera = camera;
+            _switchVideoStateButton.GetButton().onClick.AddListener(OnSwitchVideoStateButtonPressedHandler);
         }
 
-        public void OnSwitchVideoStateButtonPressedHandler()
+        private void OnSwitchVideoStateButtonPressedHandler()
         {
             OnSwitchVideoStateButtonPressed?.Invoke();
         }

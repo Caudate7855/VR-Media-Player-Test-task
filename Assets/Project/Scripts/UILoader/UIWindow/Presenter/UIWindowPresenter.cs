@@ -24,6 +24,8 @@ namespace Project.UILoader
         private List<UIWindowPreview> _previews;
         private MediaPlayer _mediaPlayer;
 
+        private bool _isVideoStarted;
+
         public UIWindowPresenter(IAssetLoader assetLoader, string uiWindowViewAddress, MediaLinks mediaLinks,
             Camera camera)
         {
@@ -48,9 +50,8 @@ namespace Project.UILoader
             _uiWindowView.OnSwitchVideoStateButtonPressed += OnSwitchVideoStateButtonPressed;
             
             _mediaPlayer = _uiWindowView.GetMediaPlayer();
-            _mediaPlayer.OpenMedia(new MediaPath(_mediaLinks.SerializableMediaLinks.First().VideoURL, MediaPathType.AbsolutePathOrURL));
-            _mediaPlayer.Play();
-            
+            _mediaPlayer.OpenMedia(new MediaPath(_mediaLinks.SerializableMediaLinks.First().VideoURL, MediaPathType.AbsolutePathOrURL), false);
+
             _uiWindowView.SetEpisodeName(_mediaLinks.SerializableMediaLinks.First().EpisodeName);
         }
 
