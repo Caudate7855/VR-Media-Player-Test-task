@@ -14,11 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serializableMediaLinks:
   - EpisodeNumber: 40
+    EpisodeName: "\u0421\u0432\u0438\u043D\u043A\u0430 \u041F\u0435\u043F\u043F\u0430:
+      40. \u041F\u0430\u043F\u0430 \u0440\u0435\u0448\u0438\u043B \u0441\u0442\u0430\u0442\u044C
+      \u0441\u0442\u0440\u043E\u0439\u043D\u044B\u043C"
     PreviewURL: https://storage.yandexcloud.net/viavr.global/assets/content_card/bfdebabe-a264-4b97-ae74-e6abb2bc5ce3/images/47631a5d39d3.jpg
     VideoURL: https://storage.yandexcloud.net/viavr.global/CARTOONS/Peppa_Pig/Peppa_Pig_s01e40_Daddy_Gets_Fit.mp4
   - EpisodeNumber: 41
+    EpisodeName: "\u0421\u0432\u0438\u043D\u043A\u0430 \u041F\u0435\u043F\u043F\u0430:
+      41. \u0421\u0443\u043F\u0435\u0440\u043C\u0430\u0440\u043A\u0435\u0442"
     PreviewURL: https://storage.yandexcloud.net/viavr.global/assets/content_card/a0a9a962-9510-40b0-bad6-897722e010a4/images/f6ab6c7ffc58.jpg
     VideoURL: https://storage.yandexcloud.net/viavr.global/CARTOONS/Peppa_Pig/Peppa_Pig_s01e41_Shopping.mp4
   - EpisodeNumber: 38
+    EpisodeName: "\u0421\u0432\u0438\u043D\u043A\u0430 \u041F\u0435\u043F\u043F\u0430:
+      38. \u0421\u043F\u044F\u0449\u0430\u044F \u043F\u0440\u0438\u043D\u0446\u0435\u0441\u0441\u0430"
     PreviewURL: https://storage.yandexcloud.net/viavr.global/assets/content_card/f91aaa3e-d4b9-4118-975a-6091e8ea29b7/images/eab2500465ed.jpg
     VideoURL: https://storage.yandexcloud.net/viavr.global/CARTOONS/Peppa_Pig/Peppa_Pig_s01e38_Sleepy_Princess.mp4

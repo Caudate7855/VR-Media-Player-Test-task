@@ -45,9 +45,13 @@ namespace Project.UILoader
             
             _uiWindowView = Object.Instantiate(uiWindowView);
             _uiWindowView.Initialize(camera);
+            _uiWindowView.OnSwitchVideoStateButtonPressed += OnSwitchVideoStateButtonPressed;
+            
             _mediaPlayer = _uiWindowView.GetMediaPlayer();
             _mediaPlayer.OpenMedia(new MediaPath(_mediaLinks.SerializableMediaLinks.First().VideoURL, MediaPathType.AbsolutePathOrURL));
             _mediaPlayer.Play();
+            
+            _uiWindowView.SetEpisodeName(_mediaLinks.SerializableMediaLinks.First().EpisodeName);
         }
 
         private async UniTask InitializePreviews()
@@ -75,8 +79,22 @@ namespace Project.UILoader
         {
             _mediaPlayer.OpenMedia(new MediaPath(_mediaLinks.SerializableMediaLinks[index].VideoURL, MediaPathType.AbsolutePathOrURL));
             _mediaPlayer.Play();
+            
+            _uiWindowView.SetEpisodeName(_mediaLinks.SerializableMediaLinks[index].EpisodeName);
         }
 
+        private void OnSwitchVideoStateButtonPressed()
+        {
+            if (_mediaPlayer.Control.IsPlaying())
+            {
+                _mediaPlayer.Pause();
+            }
+            else
+            {
+                _mediaPlayer.Play();
+            }
+        }
+        
         private void OnPreviewButtonClicked(UIWindowPreview preview)
         {
             _mediaPlayer.Stop();
