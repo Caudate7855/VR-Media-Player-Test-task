@@ -133,9 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f3c9c8cb8a431da8a911561d779650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buttonStateSprites:
-  - {fileID: 21300000, guid: 048f14a1087821341a120336e82f2207, type: 3}
-  - {fileID: 21300000, guid: c0c201e7beee77645a15d0bf84decec6, type: 3}
   _button: {fileID: 5945509647651002777}
   _buttonImage: {fileID: 6131979718561319983}
 --- !u!1 &509991174229574551
@@ -294,10 +291,10 @@ MonoBehaviour:
   m_Padding:
     m_Left: 20
     m_Right: 0
-    m_Top: 50
+    m_Top: 8
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 107.16
+  m_Spacing: 100
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0

@@ -75,7 +75,7 @@ namespace Project.UILoader
                     await URLMediaLoader.URLMediaLoader.LoadImageAsync(_mediaLinks.SerializableMediaLinks[i]
                         .PreviewURL);
 
-                _previews[i].EpisodeName = _mediaLinks.SerializableMediaLinks[i].EpisodeName;
+                _previews[i].EpisodeName.text = _mediaLinks.SerializableMediaLinks[i].EpisodeName;
                 
                 _previews[i].GetLoadingOverlay().Disable();
             }
@@ -89,7 +89,7 @@ namespace Project.UILoader
         {
             _mediaPlayer.OpenMedia(new MediaPath(videoURL, MediaPathType.AbsolutePathOrURL));
             
-            _uiWindowView.SetEpisodeName(_selectedPreview.EpisodeName);
+            _uiWindowView.SetEpisodeName(_selectedPreview.EpisodeName.text);
 
             _currentEpisodePreview = _selectedPreview;
         }
@@ -149,7 +149,7 @@ namespace Project.UILoader
             if (preview.GetState() == PreviewStates.Unselected)
             {
                 preview.SetState(PreviewStates.Selected);
-                preview.transform.DOScale(SELECTED_SCALE, SCALE_ANIMATION_DURATION).SetEase(Ease.Linear);
+                preview.Window.transform.DOScale(SELECTED_SCALE, SCALE_ANIMATION_DURATION).SetEase(Ease.Linear);
             }
         }
 
@@ -158,7 +158,7 @@ namespace Project.UILoader
             if (preview.GetState() == PreviewStates.Selected)
             {
                 preview.SetState(PreviewStates.Unselected);
-                preview.transform.DOScale(UNSELECTED_SCALE, SCALE_ANIMATION_DURATION).SetEase(Ease.Linear);
+                preview.Window.transform.DOScale(UNSELECTED_SCALE, SCALE_ANIMATION_DURATION).SetEase(Ease.Linear);
             }
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using Project.UILoader.Previews.Enums;
 using Project.UILoader.Previews.LoadingCircle;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,14 +11,14 @@ namespace Project.UILoader.Previews
     {
         public event Action<UIWindowPreview> OnButtonPressed;
         
-        public string EpisodeName;
-
+        public TMP_Text EpisodeName;
+        public GameObject Window;
+        
         [SerializeField] private Image _image;
         [SerializeField] private Button _button;
         [SerializeField] private LoadingOverlay _loadingOverlay;
         [SerializeField] private int _previewIndex;
-
-
+        
         private PreviewStates _currentState;
 
         private void Awake()
