@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -8,10 +9,17 @@ namespace Project.URLMediaLoader
     [UsedImplicitly]
     public class URLMediaLoader
     {
+        private static Dictionary<string, Sprite> _cashedSprites = new();
+        
         public static async Task<Sprite> LoadImageAsync(string url)
         {
-            using var uwr = UnityWebRequestTexture.GetTexture(url);
+            if (_cashedSprites.TryGetValue(url, out var cashedSprite))
+            {
+                return cashedSprite;
+            }
             
+            using var uwr = UnityWebRequestTexture.GetTexture(url);
+
             var operation = uwr.SendWebRequest();
 
             while (!operation.isDone)
@@ -19,18 +27,13 @@ namespace Project.URLMediaLoader
                 await Task.Yield();
             }
 
-            if (uwr.result != UnityWebRequest.Result.Success)
-            {
-                return null;
-            }
-            else
-            {
-                var texture = DownloadHandlerTexture.GetContent(uwr);
-                    
-                var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            var texture = DownloadHandlerTexture.GetContent(uwr);
 
-                return sprite;
-            }
+            var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+            _cashedSprites[url] = sprite;
+            
+            return sprite;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Project.IoC.MonoInstallers
                 .AsSingle();
             
             Container
-                .Bind<UIWindowPresenter>()
+                .Bind<UIWindowController>()
                 .AsSingle();
         }
     }

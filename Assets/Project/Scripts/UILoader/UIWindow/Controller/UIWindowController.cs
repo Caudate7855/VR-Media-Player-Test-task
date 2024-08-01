@@ -10,14 +10,14 @@ using UnityEngine;
 
 namespace Project.UILoader
 {
-    public class UIWindowPresenter
+    public class UIWindowController
     {
         private const float SCALE_ANIMATION_DURATION = 0.1f;
         private const float SELECTED_SCALE = 1.1f;
         private const float UNSELECTED_SCALE = 1f;
+        private const string WINDOW_VIEW_ADDRESSABLE_PATH = "UIWindow";
 
         private UIWindowView _uiWindowView;
-        private UIWindowModel _uiWindowModel;
 
         private IAssetLoader _assetLoader;
         private MediaLinks _mediaLinks;
@@ -29,24 +29,23 @@ namespace Project.UILoader
         private MediaPlayer _mediaPlayer;
         private SwitchVideoStateButton _switchVideoStateButton;
 
-        public UIWindowPresenter(IAssetLoader assetLoader, string uiWindowViewAddress, MediaLinks mediaLinks,
-            Camera camera)
+        public UIWindowController(IAssetLoader assetLoader, MediaLinks mediaLinks, Camera camera)
         {
             _assetLoader = assetLoader;
             _mediaLinks = mediaLinks;
 
-            Initialize(uiWindowViewAddress, camera);
+            Initialize(camera);
         }
 
-        private async void Initialize(string uiWindowViewAddress, Camera camera)
+        private async void Initialize(Camera camera)
         {
-            await InitializeWindow(uiWindowViewAddress, camera);
+            await InitializeWindow(camera);
             await InitializePreviews();
         }
 
-        private async UniTask InitializeWindow(string uiWindowViewAddress, Camera camera)
+        private async UniTask InitializeWindow(Camera camera)
         {
-            var uiWindowView = await _assetLoader.Load<UIWindowView>(uiWindowViewAddress);
+            var uiWindowView = await _assetLoader.Load<UIWindowView>(WINDOW_VIEW_ADDRESSABLE_PATH);
             
             _uiWindowView = Object.Instantiate(uiWindowView);
             _uiWindowView.Initialize(camera);
