@@ -13,7 +13,7 @@ namespace Project.UILoader
     public class UIWindowController
     {
         private const float SCALE_ANIMATION_DURATION = 0.1f;
-        private const float SELECTED_SCALE = 1.1f;
+        private const float SELECTED_SCALE = 1.05f;
         private const float UNSELECTED_SCALE = 1f;
         private const string WINDOW_VIEW_ADDRESSABLE_PATH = "UIWindow";
 
@@ -52,6 +52,8 @@ namespace Project.UILoader
             _uiWindowView.OnSwitchVideoStateButtonPressed += OnSwitchVideoStateButtonPressed;
             
             _mediaPlayer = _uiWindowView.GetMediaPlayer();
+            _mediaPlayer.Events.AddListener(OnVideoFinished);
+            
             _mediaPlayer.OpenMedia(new MediaPath(_mediaLinks.SerializableMediaLinks.First().VideoURL, MediaPathType.AbsolutePathOrURL), false);
             
             _uiWindowView.SetEpisodeName(_mediaLinks.SerializableMediaLinks.First().EpisodeName);
@@ -85,6 +87,14 @@ namespace Project.UILoader
             SelectPreview(_previews.First());
         }
 
+        private void OnVideoFinished(MediaPlayer mp, MediaPlayerEvent.EventType eventType, ErrorCode errorCode)
+        {
+            if (eventType == MediaPlayerEvent.EventType.FinishedPlaying)
+            {
+                ChangeButtonView(false);
+            }
+        }
+        
         private void ChangeVideo(string videoURL)
         {
             _mediaPlayer.OpenMedia(new MediaPath(videoURL, MediaPathType.AbsolutePathOrURL));
