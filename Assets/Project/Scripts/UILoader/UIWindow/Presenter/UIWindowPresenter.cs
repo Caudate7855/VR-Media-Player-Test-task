@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Project.UILoader.ControlPanel;
 using Project.UILoader.Previews;
 using Project.UILoader.Previews.Enums;
 using RenderHeads.Media.AVProVideo;
@@ -22,9 +23,11 @@ namespace Project.UILoader
         private MediaLinks _mediaLinks;
 
         private List<UIWindowPreview> _previews;
+        private UIWindowPreview _currentEpisodePreview;
+        private UIWindowPreview _selectedPreview;
+        
         private MediaPlayer _mediaPlayer;
-
-        private bool _isVideoStarted;
+        private SwitchVideoStateButton _switchVideoStateButton;
 
         public UIWindowPresenter(IAssetLoader assetLoader, string uiWindowViewAddress, MediaLinks mediaLinks,
             Camera camera)
@@ -51,8 +54,11 @@ namespace Project.UILoader
             
             _mediaPlayer = _uiWindowView.GetMediaPlayer();
             _mediaPlayer.OpenMedia(new MediaPath(_mediaLinks.SerializableMediaLinks.First().VideoURL, MediaPathType.AbsolutePathOrURL), false);
-
+            
             _uiWindowView.SetEpisodeName(_mediaLinks.SerializableMediaLinks.First().EpisodeName);
+
+            _switchVideoStateButton = _uiWindowView.GetSwitchVideoStateButton();
+            _switchVideoStateButton.GetButton().image.sprite = _uiWindowView.GetButtonStateSprites()[1];
         }
 
         private async UniTask InitializePreviews()
@@ -74,14 +80,19 @@ namespace Project.UILoader
                 
                 _previews[i].GetLoadingOverlay().Disable();
             }
+            
+            _currentEpisodePreview = _previews.First();
+            _selectedPreview = _previews.First();
+            SelectPreview(_previews.First());
         }
 
-        private void ChangeVideo(int index)
+        private void ChangeVideo(string videoURL)
         {
-            _mediaPlayer.OpenMedia(new MediaPath(_mediaLinks.SerializableMediaLinks[index].VideoURL, MediaPathType.AbsolutePathOrURL));
-            _mediaPlayer.Play();
+            _mediaPlayer.OpenMedia(new MediaPath(videoURL, MediaPathType.AbsolutePathOrURL));
             
-            _uiWindowView.SetEpisodeName(_mediaLinks.SerializableMediaLinks[index].EpisodeName);
+            _uiWindowView.SetEpisodeName(_selectedPreview.EpisodeName);
+
+            _currentEpisodePreview = _selectedPreview;
         }
 
         private void OnSwitchVideoStateButtonPressed()
@@ -89,36 +100,48 @@ namespace Project.UILoader
             if (_mediaPlayer.Control.IsPlaying())
             {
                 _mediaPlayer.Pause();
+                ChangeButtonView(false);
             }
             else
             {
                 _mediaPlayer.Play();
+                ChangeButtonView(true);
+
+                if (_selectedPreview != _currentEpisodePreview)
+                {
+                    ChangeVideo(_mediaLinks.SerializableMediaLinks[_selectedPreview.GetIndex()].VideoURL);
+                }
+            }
+        }
+        
+        private void ChangeButtonView(bool isPlaying)
+        {
+            if (isPlaying)
+            {
+                _switchVideoStateButton.GetButton().image.sprite = _uiWindowView.GetButtonStateSprites()[0];
+            }
+            else
+            {
+                _switchVideoStateButton.GetButton().image.sprite = _uiWindowView.GetButtonStateSprites()[1];
             }
         }
         
         private void OnPreviewButtonClicked(UIWindowPreview preview)
         {
-            _mediaPlayer.Stop();
-            
             for (int i = 0, count = _previews.Count; i < count; i++)
             {
                 if (_previews[i] != preview)
                 {
                     DeselectPreview(_previews[i]);
                 }
-                else
-                {
-                    ChangeVideo(i);
-                }
             }
             
             if (preview.GetState() == PreviewStates.Unselected)
             {
+                _mediaPlayer.Pause();
+                _selectedPreview = preview;
+                ChangeButtonView(false);
                 SelectPreview(preview);
-            }
-            else
-            {
-                DeselectPreview(preview);
             }
         }
 

@@ -653,7 +653,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -10, y: 204.45}
+  m_AnchoredPosition: {x: -10, y: 100}
   m_SizeDelta: {x: 1920, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!1 &5417047412996197068
@@ -743,6 +743,9 @@ MonoBehaviour:
   - {fileID: 2874005071736720528}
   - {fileID: 7057488871015617638}
   - {fileID: 2725117012440210685}
+  _buttonStateSprites:
+  - {fileID: 21300000, guid: 048f14a1087821341a120336e82f2207, type: 3}
+  - {fileID: 21300000, guid: c0c201e7beee77645a15d0bf84decec6, type: 3}
   _switchVideoStateButton: {fileID: 5466146661546722020}
   _episodeName: {fileID: 4803513222714068177}
 --- !u!1 &6124883902143716574
@@ -1334,7 +1337,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10, y: -37.62}
+  m_AnchoredPosition: {x: -10, y: -85}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 1, y: 1}
 --- !u!1 &8530700353953861517
@@ -1601,6 +1604,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4234400494971723363}
     m_Modifications:
+    - target: {fileID: 855057953082560860, guid: 4d0b6335510e58d409203045f047f3e9, type: 3}
+      propertyPath: _previewIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4227007461135428563, guid: 4d0b6335510e58d409203045f047f3e9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1714,6 +1721,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4234400494971723363}
     m_Modifications:
+    - target: {fileID: 855057953082560860, guid: 4d0b6335510e58d409203045f047f3e9, type: 3}
+      propertyPath: _previewIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4227007461135428563, guid: 4d0b6335510e58d409203045f047f3e9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

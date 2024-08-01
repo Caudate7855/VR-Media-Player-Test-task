@@ -15,6 +15,7 @@ namespace Project.UILoader.Previews
         [SerializeField] private Image _image;
         [SerializeField] private Button _button;
         [SerializeField] private LoadingOverlay _loadingOverlay;
+        [SerializeField] private int _previewIndex;
 
 
         private PreviewStates _currentState;
@@ -34,6 +35,11 @@ namespace Project.UILoader.Previews
             _button.onClick.RemoveListener(OnButtonClickHandler);
         }
 
+        public int GetIndex()
+        {
+            return _previewIndex;
+        }
+        
         public Image GetImage()
         {
             return _image;

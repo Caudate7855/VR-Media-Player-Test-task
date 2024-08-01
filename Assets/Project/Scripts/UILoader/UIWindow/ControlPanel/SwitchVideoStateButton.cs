@@ -7,16 +7,14 @@ namespace Project.UILoader.ControlPanel
 {
     public class SwitchVideoStateButton : MonoBehaviour
     {
-        public event Action OnSwitchButtonPressed;
-
-        [SerializeField] private List<Sprite> _buttonStateSprites; 
+        public event Action<SwitchVideoStateButton> OnSwitchButtonPressed;
+        
         [SerializeField] private Button _button;
         [SerializeField] private Image _buttonImage;
         private bool _isPlaying;
 
         private void Start()
         {
-            _buttonImage.sprite = _buttonStateSprites[0];
             _button.onClick.AddListener(OnSwitchButtonPressedHandler);
         }
 
@@ -27,22 +25,7 @@ namespace Project.UILoader.ControlPanel
 
         private void OnSwitchButtonPressedHandler()
         {
-            ChangeButtonView();
-            OnSwitchButtonPressed?.Invoke();
-        }
-
-        private void ChangeButtonView()
-        {
-            if (_isPlaying)
-            {
-                _isPlaying = false;
-                _buttonImage.sprite = _buttonStateSprites[0];
-            }
-            else
-            {
-                _isPlaying = true;
-                _buttonImage.sprite = _buttonStateSprites[1];
-            }
+            OnSwitchButtonPressed?.Invoke(this);
         }
     }
 }
