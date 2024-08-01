@@ -1,35 +1,35 @@
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 
 namespace Project.URLMediaLoader
 {
+    [UsedImplicitly]
     public class URLMediaLoader
     {
         public static async Task<Sprite> LoadImageAsync(string url)
         {
-            using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(url))
+            using var uwr = UnityWebRequestTexture.GetTexture(url);
+            
+            var operation = uwr.SendWebRequest();
+
+            while (!operation.isDone)
             {
-                var operation = uwr.SendWebRequest();
+                await Task.Yield();
+            }
 
-                while (!operation.isDone)
-                {
-                    await Task.Yield();
-                }
-
-                if (uwr.result != UnityWebRequest.Result.Success)
-                {
-                    return null;
-                }
-                else
-                {
-                    var texture = DownloadHandlerTexture.GetContent(uwr);
+            if (uwr.result != UnityWebRequest.Result.Success)
+            {
+                return null;
+            }
+            else
+            {
+                var texture = DownloadHandlerTexture.GetContent(uwr);
                     
-                    var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
 
-                    return sprite;
-                }
+                return sprite;
             }
         }
     }
