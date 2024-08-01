@@ -1,4 +1,4 @@
-namespace Project.UILoader.Previews.Enums
+namespace Project.UI.Previews
 {
     public enum PreviewStates : byte
     {

@@ -1,9 +1,8 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Project.UILoader.Previews.LoadingCircle
+namespace Project.UI.Previews.LoadingCircle
 {
     public class LoadingOverlay : MonoBehaviour
     {

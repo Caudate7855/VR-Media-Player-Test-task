@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 191010457}
   - component: {fileID: 191010456}
   m_Layer: 0
-  m_Name: EnrtyPoint
+  m_Name: Boot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,8 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ed02e15d7e4ce794eaea5122fffb0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mediaPlayer: {fileID: 0}
-  _mediaPlayerUIPrefab: {fileID: 8665499630207277163, guid: 44eff07286955cd49a37ac138cba4be1, type: 3}
 --- !u!4 &191010457
 Transform:
   m_ObjectHideFlags: 0

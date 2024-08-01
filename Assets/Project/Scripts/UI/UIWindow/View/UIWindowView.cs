@@ -1,17 +1,17 @@
 using System;
 using System.Collections.Generic;
-using Project.UILoader.ControlPanel;
-using Project.UILoader.Previews;
+using Project.UI.ControlPanel;
+using Project.UI.Previews;
 using RenderHeads.Media.AVProVideo;
 using TMPro;
 using UnityEngine;
 
-namespace Project.UILoader
+namespace Project.UI
 {
     public class UIWindowView : MonoBehaviour
     {
         public event Action OnSwitchVideoStateButtonPressed;
-        
+
         [SerializeField] private MediaPlayer _mediaPlayer;
         [SerializeField] private Canvas _canvas;
         [SerializeField] private List<UIWindowPreview> _previews;
@@ -25,11 +25,6 @@ namespace Project.UILoader
             _switchVideoStateButton.GetButton().onClick.AddListener(OnSwitchVideoStateButtonPressedHandler);
         }
 
-        private void OnSwitchVideoStateButtonPressedHandler()
-        {
-            OnSwitchVideoStateButtonPressed?.Invoke();
-        }
-
         public void SetEpisodeName(string value)
         {
             _episodeName.text = value;
@@ -39,11 +34,12 @@ namespace Project.UILoader
         {
             return _switchVideoStateButton;
         }
-        
+
         public List<Sprite> GetButtonStateSprites()
         {
             return _buttonStateSprites;
         }
+
         public MediaPlayer GetMediaPlayer()
         {
             return _mediaPlayer;
@@ -52,6 +48,11 @@ namespace Project.UILoader
         public List<UIWindowPreview> GetPreviews()
         {
             return _previews;
+        }
+
+        private void OnSwitchVideoStateButtonPressedHandler()
+        {
+            OnSwitchVideoStateButtonPressed?.Invoke();
         }
     }
 }

@@ -1,4 +1,3 @@
-using Project.UILoader;
 using UnityEngine;
 using Zenject;
 
@@ -18,10 +17,6 @@ namespace Project.IoC.MonoInstallers
             Container
                 .Bind<IAssetLoader>()
                 .To<AssetLoader>()
-                .AsSingle();
-            
-            Container
-                .Bind<UIWindowController>()
                 .AsSingle();
         }
     }

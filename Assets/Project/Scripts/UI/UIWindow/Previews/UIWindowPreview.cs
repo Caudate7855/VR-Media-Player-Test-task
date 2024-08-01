@@ -1,11 +1,10 @@
 using System;
-using Project.UILoader.Previews.Enums;
-using Project.UILoader.Previews.LoadingCircle;
+using Project.UI.Previews.LoadingCircle;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Project.UILoader.Previews
+namespace Project.UI.Previews
 {
     public class UIWindowPreview : MonoBehaviour
     {

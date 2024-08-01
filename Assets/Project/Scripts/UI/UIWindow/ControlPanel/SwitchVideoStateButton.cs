@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Project.UILoader.ControlPanel
+namespace Project.UI.ControlPanel
 {
     public class SwitchVideoStateButton : MonoBehaviour
     {
@@ -10,6 +10,7 @@ namespace Project.UILoader.ControlPanel
         
         [SerializeField] private Button _button;
         [SerializeField] private Image _buttonImage;
+        
         private bool _isPlaying;
 
         private void Start()

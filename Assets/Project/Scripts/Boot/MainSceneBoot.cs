@@ -1,4 +1,4 @@
-using Project.UILoader;
+using Project.UI;
 using UnityEngine;
 using Zenject;
 

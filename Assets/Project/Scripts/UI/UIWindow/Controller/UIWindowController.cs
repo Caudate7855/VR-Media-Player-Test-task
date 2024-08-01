@@ -2,13 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Project.UILoader.ControlPanel;
-using Project.UILoader.Previews;
-using Project.UILoader.Previews.Enums;
+using Project.UI.ControlPanel;
+using Project.UI.Previews;
 using RenderHeads.Media.AVProVideo;
 using UnityEngine;
 
-namespace Project.UILoader
+namespace Project.UI
 {
     public class UIWindowController
     {
@@ -50,7 +49,7 @@ namespace Project.UILoader
             _uiWindowView = Object.Instantiate(uiWindowView);
             _uiWindowView.Initialize(camera);
             _uiWindowView.OnSwitchVideoStateButtonPressed += OnSwitchVideoStateButtonPressed;
-            
+
             _mediaPlayer = _uiWindowView.GetMediaPlayer();
             _mediaPlayer.Events.AddListener(OnVideoFinished);
             
@@ -91,7 +90,7 @@ namespace Project.UILoader
         {
             if (eventType == MediaPlayerEvent.EventType.FinishedPlaying)
             {
-                ChangeButtonView(false);
+                ChangeButtonView(SwitchButtonStates.Pause);
             }
         }
         
@@ -109,12 +108,12 @@ namespace Project.UILoader
             if (_mediaPlayer.Control.IsPlaying())
             {
                 _mediaPlayer.Pause();
-                ChangeButtonView(false);
+                ChangeButtonView(SwitchButtonStates.Pause);
             }
             else
             {
                 _mediaPlayer.Play();
-                ChangeButtonView(true);
+                ChangeButtonView(SwitchButtonStates.Play);
 
                 if (_selectedPreview != _currentEpisodePreview)
                 {
@@ -123,9 +122,9 @@ namespace Project.UILoader
             }
         }
         
-        private void ChangeButtonView(bool isPlaying)
+        private void ChangeButtonView(SwitchButtonStates switchButtonState)
         {
-            if (isPlaying)
+            if (switchButtonState == SwitchButtonStates.Play)
             {
                 _switchVideoStateButton.GetButton().image.sprite = _uiWindowView.GetButtonStateSprites()[0];
             }
@@ -149,7 +148,7 @@ namespace Project.UILoader
             {
                 _mediaPlayer.Pause();
                 _selectedPreview = preview;
-                ChangeButtonView(false);
+                ChangeButtonView(SwitchButtonStates.Pause);
                 SelectPreview(preview);
             }
         }
